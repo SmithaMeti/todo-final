@@ -8,6 +8,7 @@ function TodoList() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     document.body.className = isDarkTheme ? "dark-theme" : "light-theme";
@@ -79,9 +80,22 @@ function TodoList() {
     setIsDarkTheme(!isDarkTheme);
   };
 
+  const filteredTodos = todos.filter((todo) =>
+    todo.text.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="todo-list">
       <h1>Todo List</h1>
+      <div className="search-input">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search tasks..."
+          className="search-box"
+        />
+      </div>
       <button className="theme-switcher" onClick={toggleTheme}>
         {isDarkTheme ? "☀️" : "🌙"}
       </button>
@@ -96,7 +110,7 @@ function TodoList() {
         <button onClick={addTodo}>Add</button>
       </div>
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
