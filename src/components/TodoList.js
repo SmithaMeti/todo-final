@@ -16,10 +16,7 @@ function TodoList() {
 
   const addTodo = () => {
     if (newTodo.trim()) {
-      setTodos([
-        ...todos,
-        { id: Date.now(), text: newTodo, completed: false },
-      ]);
+      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
       setNewTodo("");
     }
   };
@@ -104,9 +101,9 @@ function TodoList() {
           className="search-box"
         />
       </div>
-      <button className="theme-switcher" onClick={toggleTheme}>
+      {/* <button className="theme-switcher" onClick={toggleTheme}>
         {isDarkTheme ? "☀️" : "🌙"}
-      </button>
+      </button> */}
       <div className="todo-input">
         <input
           type="text"
@@ -118,8 +115,8 @@ function TodoList() {
         <button onClick={addTodo}>Add</button>
       </div>
       {todos.length > 0 && (
-        <button 
-          className="mark-all-completed-button" 
+        <button
+          className="mark-all-completed-button"
           onClick={markAllAsCompleted}
         >
           ✓ Mark All Complete
