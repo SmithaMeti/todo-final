@@ -1,0 +1,185 @@
+.todo-list {
+  max-width: 400px;
+  margin: 50px auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.todo-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.todo-input input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.todo-input button {
+  padding: 10px 20px;
+  margin-left: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.todo-input button:hover {
+  background-color: #0056b3;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: transform 0.2s ease-in-out;
+  color: inherit; /* Inherit text color from the theme */
+}
+
+.todo-item-buttons {
+  display: none;
+}
+
+.todo-item:hover .todo-item-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: #888; /* Adjusted for better visibility in both themes */
+}
+
+.todo-item:hover {
+  transform: scale(1.02);
+}
+
+body.dark-theme .todo-item {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+.todo-item button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.todo-item button:hover {
+  color: #007bff;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-content button {
+  margin: 5px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.modal-content button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-content button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.modal-content button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.modal-content button:last-child:hover {
+  background-color: #c82333;
+}
+
+.clear-all-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.clear-all-button:hover {
+  background-color: #c82333;
+}
+
+body.light-theme {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+body.dark-theme {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.theme-switcher {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.theme-switcher:hover {
+  background-color: #0056b3;
+}
