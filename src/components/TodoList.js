@@ -101,9 +101,9 @@ function TodoList() {
           className="search-box"
         />
       </div>
-      {/* <button className="theme-switcher" onClick={toggleTheme}>
+      <button className="theme-switcher" onClick={toggleTheme}>
         {isDarkTheme ? "☀️" : "🌙"}
-      </button> */}
+      </button>
       <div className="todo-input">
         <input
           type="text"
