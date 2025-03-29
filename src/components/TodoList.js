@@ -9,6 +9,8 @@ function TodoList() {
   const [editingTodo, setEditingTodo] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [tags, setTags] = useState([]);
+  const [selectedTag, setSelectedTag] = useState("");
 
   useEffect(() => {
     document.body.className = isDarkTheme ? "dark-theme" : "light-theme";
@@ -16,8 +18,13 @@ function TodoList() {
 
   const addTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, { id: Date.now(), text: newTodo, completed: false }]);
+      const newTags = tags.length ? tags : ["General"];
+      setTodos([
+        ...todos,
+        { id: Date.now(), text: newTodo, completed: false, tags: newTags },
+      ]);
       setNewTodo("");
+      setTags([]);
     }
   };
 
@@ -80,9 +87,27 @@ function TodoList() {
     setIsDarkTheme(!isDarkTheme);
   };
 
-  const filteredTodos = todos.filter((todo) =>
-    todo.text.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const addTag = (tag) => {
+    if (tag.trim() && !tags.includes(tag)) {
+      setTags([...tags, tag]);
+    }
+  };
+
+  const removeTag = (tag) => {
+    setTags(tags.filter((t) => t !== tag));
+  };
+
+  const markAllAsCompleted = () => {
+    setTodos(todos.map((todo) => ({ ...todo, completed: true })));
+  };
+
+  const filteredTodos = todos.filter((todo) => {
+    const matchesSearch = todo.text
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesTag = selectedTag ? todo.tags.includes(selectedTag) : true;
+    return matchesSearch && matchesTag;
+  });
 
   return (
     <div className="todo-list">
@@ -109,6 +134,36 @@ function TodoList() {
         />
         <button onClick={addTodo}>Add</button>
       </div>
+      <div className="tag-input">
+        <input
+          type="text"
+          placeholder="Add a tag..."
+          onKeyPress={(e) => e.key === "Enter" && addTag(e.target.value)}
+        />
+        <div className="tags">
+          {tags.map((tag) => (
+            <span key={tag} className="tag">
+              {tag} <button onClick={() => removeTag(tag)}>x</button>
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className="filter-by-tag">
+        <select
+          value={selectedTag}
+          onChange={(e) => setSelectedTag(e.target.value)}
+        >
+          <option value="">All Tags</option>
+          {[...new Set(todos.flatMap((todo) => todo.tags))].map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button className="mark-all-completed" onClick={markAllAsCompleted}>
+        Mark All as Completed
+      </button>
       <ul>
         {filteredTodos.map((todo) => (
           <TodoItem
