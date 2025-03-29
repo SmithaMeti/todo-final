@@ -1,13 +1,19 @@
 import React from "react";
 import "./styles.css";
 
-function TodoItem({ todo, onDelete, onToggleComplete, onEdit }) {
+function TodoItem({ todo, onDelete, onToggleComplete, onEdit, isCompleted }) {
   return (
-    <li className={`todo-item ${todo.completed ? "completed" : ""}`}>
-      <span onClick={() => onToggleComplete(todo.id)}>{todo.text}</span>
-      <div className="todo-item-buttons">
-        <button onClick={() => onEdit(todo)}>✏️</button>
-        <button onClick={() => onDelete(todo.id)}>🗑️</button>
+    <li className={`todo-item ${isCompleted ? 'completed' : ''}`}>
+      <input
+        type="checkbox"
+        checked={isCompleted}
+        onChange={() => onToggleComplete(todo.id)}
+        className="todo-checkbox"
+      />
+      <span className="todo-text">{todo.text}</span>
+      <div className="todo-actions">
+        <button onClick={() => onEdit(todo)}>Edit</button>
+        <button onClick={() => onDelete(todo.id)}>Delete</button>
       </div>
     </li>
   );
