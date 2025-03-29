@@ -97,6 +97,8 @@ function TodoList() {
     setTags(tags.filter((t) => t !== tag));
   };
 
+  //test
+
   const markAllAsCompleted = () => {
     setTodos(todos.map((todo) => ({ ...todo, completed: true })));
   };
